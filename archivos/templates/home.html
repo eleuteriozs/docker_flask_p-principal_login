@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+{% block head %}
+    <title>Web test</title>
+
+{% endblock %}
+{% block body %}
+
+    <style>
+        body{
+            background: url(img/f7.gif);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+
+        
+    </style>
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-lg">
+            <!--<center>-->
+               <!--<img src="{{ request.host_url }}/img/duck.gif" alt="">-->
+               <!--<h1 class="mt-5">Hola {{ user.name }}!</h1>-->
+                
+               <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h1 class="mt-5" style="color: blue; box-shadow: 2px 5px 3px blue;
+                                text-shadow: 2px 2px 6px white";>Publicar algo</h1>
+                            <form class="form" action="{{ url_for('timeline') }}" method="POST">
+                                {{ form.csrf_token }}
+                                <div class="form-group">                                    
+                                    {{ form.publicacion(class="form-control") }}
+                                </div>                                                                
+                                <button type="submit" class="btn btn-primary">Publicar</button>
+                                <br><br>
+                            </form>
+                            {% for post in posts %} 
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <img src="{{ request.host_url }}/img/us.ico" alt="" width="50px" height="45px">
+                                        <h5 class="card-title" id="c" style="display: inline;">{{ post.user.name}}</h5>
+                                        <p class="card-text">{{ post.publicacion }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+                        </div>
+                        <div class="col">
+                            <div class="card mt-4" style="whidth: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ user.name }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"> {{ user.correo }}!</h6>
+                                    <p class="card-text"> {{ user.biografia }} </p>
+                                    <a href="#" class="card-link">Logout</a>
+                                </div>
+                            </div>                                                                
+                        </div>
+                    </div>
+
+               </div>
+            <!--</center>-->
+        </div>
+    </div>
+{% endblock %}
